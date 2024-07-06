@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Link CSS de Bootstrap descargado-->
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <!--Fin Link CSS de Bootstrap descargado-->
+
+    <!--Inicia Liga CSS-->
+    <link rel="stylesheet" href="../css/main.css" />
+    <!--Fin Liga CSS-->
+
+    <!--Inicio Scrip Iconos-->
+    <script src="https://kit.fontawesome.com/6b1768eb67.js" crossorigin="anonymous"></script>
+    <!--Fin Scrip Iconos-->
+
+    <!--Inicio Liga Favicon-->
+    <link rel="icon" href="../assets/images/favicon.ico" />
+    <!--Fin Liga Favicon-->
+
+    <title>iPhone Store - SE</title>
+</head>
+
+<body>
+
+    <div class="">
+        <!-- nav + logo -->
+        <header class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <nav class="navbar py-0 navbar-expand-md navbar-dark">
+                        <a class="navbar-brand" href="../index.html">
+                            <img class="d-inline-block align-top Logo" src="../assets/images/Logo.webp"
+                                alt="Logo Iphone Store" title="Logo Iphone Store" />
+                            <p class="d-inline-block align-bottom white-text">
+                                <strong>Iphone Store</strong>
+                            </p>
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav w-100 d-flex justify-content-end">
+                                <li class="nav-item active">
+                                    <a class="nav-link agrandar white-text" href="../index.html">Inicio</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link agrandar icon-cart">
+                                        <svg class="reduce" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                            fill="none" viewBox="0 0 18 20">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M6 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0h8m-8 0-1-4m9 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-9-4h10l2-7H3m2 7L3 4m0 0-.792-3H1" />
+                                        </svg>
+                                        <span class="cantidad-carrito">0</span>
+                                        <!-- Carrito -->
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <img src="../assets/images/SE_Negro.webp" alt="Iphone SE" class="img-fluid" title="Iphone SE" />
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="row">
+                        <h1>iPhone SE</h1>
+                    </div>
+                    <div class="row">
+                        <p><strong>Configura tu equipo</strong></p>
+                    </div>
+                    <div class="row">
+                        <p>Capacidad en GB</p>
+                        <div class="col-3">
+                            <button type="button" class="btn btn-secondary btn-selected">64</button>
+                        </div>
+                        <div class="col-3">
+                            <button type="button" class="btn btn-secondary">128</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p></p>
+                    </div>
+                    <div class="row">
+                        <p>Color</p>
+                        <div class="col-3">
+                            <button type="button" class="btn btn-color btn-negro btn-selected">Negro</button>
+                        </div>
+                        <div class="col-3">
+                            <button type="button" class="btn btn-color btn-rojo">Rojo</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p></p>
+                    </div>
+                    <div class="row">
+                        <p></p>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <p>Precio:</p>
+                        </div>
+                        <div class="col-3">
+                            <p><strong class="precio"></strong></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <button type="button" class="btn btn-primary">Agregar al carrito</button>
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <h2>Descripción del producto</h2>
+                    <ul>
+                        <li>Chip A15 Bionic, el mismo que trae el iPhone13</li>
+                        <li>Rendimiento gráfico hasta x1.2 más rápido</li>
+                        <li>Un gran avance en duración de bateria</li>
+                        <li>Conexión 5G rapidísima</li>
+                        <li>Diseño hecho para durar</li>
+                        <li>Cámara que es una superestrella</li>
+                        <li>Botón de inicio para que te sientas en casa</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="cartTab">
+                <h1>Carrito</h1>
+                <div class="listCart">
+                </div>
+                <div class="btn">
+                    <button class="close">Cerrar</button>
+                    <button class="checkOut">COMPRAR</button>
+                </div>
+            </div>
+
+        </main>
+
+        <div class="container-fluid">
+            <footer class="row">
+                <div class="col-lg-6 col-xs-12">
+                    <p class="centrado white-text">Síguenos en nuestras redes:</p>
+                </div>
+
+                <div class="col-lg-6 col-xs-12 redes">
+                    <a href="https://www.facebook.com/?locale=es_LA" target="_blank"
+                        aria-label="Click para ver Face de la compañía">
+                        <i class="fa-brands fa-facebook icon"></i>
+                    </a>
+                    <a href="https://www.instagram.com/" target="_blank"
+                        aria-label="Click para ver Instagram de la compañía">
+                        <i class="fa-brands fa-instagram icon"></i>
+                    </a>
+                    <a href="https://www.tiktok.com/es/" target="_blank"
+                        aria-label="Click para ver TikTok de la compañía">
+                        <i class="fa-brands fa-tiktok icon"></i>
+                    </a>
+                    <a href="https://twitter.com/?lang=es" target="_blank"
+                        aria-label="Click para ver Twitter de la compañía">
+                        <i class="fa-brands fa-square-x-twitter icon"></i>
+                    </a>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <!-- JS de Bootstrap descargado-->
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/sistema.js"></script>
+    <script src="../js/carrito_comun.js"></script>
+    <script src="../js/carrito_producto.js"></script>
+    <script src="../js/se.js"></script>
+    <!-- <script src="../js/carrito.js"></script> -->
+</body>
+
+</html>
