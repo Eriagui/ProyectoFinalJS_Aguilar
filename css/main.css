@@ -172,14 +172,14 @@ svg{
 
 /* cart */
 .cartTab{
-    width: 400px;
+    width: 500px;
     max-width: 100vw;
     background-color: rgb(31, 29, 29);
     color: #eee;
     position: fixed;
     z-index: 10; 
     top: 0;
-    right: -400px;
+    right: -500px;
     bottom: 0;
     display: grid;
     grid-template-rows: 70px 1fr 70px;
@@ -215,7 +215,7 @@ body.showCart .container{
 }
 .listCart .item{
     display: grid;
-    grid-template-columns: 70px 150px 50px 1fr;
+    grid-template-columns: 60px 170px 60px 1fr 60px;
     gap: 10px;
     text-align: center;
     align-items: center;
@@ -242,4 +242,8 @@ body.showCart .container{
 }
 .listCart::-webkit-scrollbar{
     width: 0;
+}
+
+.total{
+    text-align: right;
 }

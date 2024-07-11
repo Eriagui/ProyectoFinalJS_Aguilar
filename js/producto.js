@@ -11,6 +11,7 @@ let color
 let modelo = localStorage.getItem("modelo")
 let capacidades = []
 let colores = []
+let nombre_imagen
 
 let modelo_filtrado = sistema.productos.filter((elm) => elm.modelo == modelo)
 
@@ -230,7 +231,7 @@ color = get_color()
 // Se muestra el precio del equipo seleccionado (por defecto)
 muestra_precio(capacidad)
 // Se muestra la imagen del equipo seleccionado (por defecto)
-muestra_imagen(color)
+nombre_imagen = muestra_imagen(color)
 
 // Se identifican todos los botones
 let boton = document.querySelectorAll(".btn")
@@ -265,7 +266,7 @@ boton.forEach((btn, num) => {
             // Se muestra el precio del equipo seleccionado
             muestra_precio(capacidad)
             // Se muestra la imagen del equipo seleccionado
-            muestra_imagen(color)
+            nombre_imagen = muestra_imagen(color)
         })
     }
 })
@@ -278,8 +279,8 @@ boton_agregar.addEventListener("click", () => {
     if (isNaN(precio)) {
         alert("Para poder agregar, primero debes terminar de configurar tu Iphone")
     } else {  // Si el Iphone ya está configurado, se puede agregar al carrito
-        let producto = get_product("SE", capacidad, color)
-        agregar_carrito(producto)
+        let id_producto = get_product_id(modelo, capacidad, color)
+        agregar_carrito(id_producto, modelo, capacidad, color, precio, nombre_imagen)
         actualizar_icono_carrito()
     }
 })
@@ -346,35 +347,43 @@ function get_price(capacidad) { // Obtiene el precio del producto seleccionado
     //return producto.precio
 }
 
-function get_product(modelo, capacidad, color) {  //Obtiene el producto seleccionado
-    let producto
-    sistema.productos.forEach((prod, num) => {
-        let modelo_producto = sistema.productos[num].modelo
-        let capacidad_producto = sistema.productos[num].capacidad
-        let color_producto = sistema.productos[num].color.toLowerCase()
-        if (modelo_producto == modelo && capacidad_producto == capacidad && color_producto == color) {
-            producto = sistema.productos[num]
-        }
-    })
-    return producto
+// function get_product(modelo, capacidad, color) {  //Obtiene el producto seleccionado
+//     let producto
+//     sistema.productos.forEach((prod, num) => {
+//         let modelo_producto = sistema.productos[num].modelo
+//         let capacidad_producto = sistema.productos[num].capacidad
+//         let color_producto = sistema.productos[num].color.toLowerCase()
+//         if (modelo_producto == modelo && capacidad_producto == capacidad && color_producto == color) {
+//             producto = sistema.productos[num]
+//         }
+//     })
+//     return producto
+// }
+
+// Asigna un ID al producto seleccionado
+function get_product_id(modelo,capacidad,color){
+    let id = modelo + "_" + capacidad + "_" + color
+    return id
 }
 
-function agregar_carrito(producto) {
+
+function agregar_carrito(id_producto, modelo, capacidad, color, precio, nombre_imagen) {
     let cantidad = 1
-    if (sistema.carrito.find((elm) => elm.id == producto.id)) { //Si el artículo ya exite en el carrito, se aumenta la cantidad en 1
+    if (sistema.carrito.find((elm) => elm.id == id_producto)) { //Si el artículo ya exite en el carrito, se aumenta la cantidad en 1
         sistema.carrito.forEach((elm, num) => {
-            if (sistema.carrito[num].id == producto.id) {
+            if (sistema.carrito[num].id == id_producto) {
                 sistema.carrito[num].cantidad++
             }
         })
     } else { // Si el producto no está aún en el carrito, se agrega como un nuevo artículo
-        let articulo = new Articulo(producto.id, cantidad)
+        let articulo = new Articulo(id_producto, modelo, capacidad, color, precio, nombre_imagen, cantidad)
         sistema.carrito.push(articulo)  // se agrega el artículo al carrito
     }
 
+    //Se agrega el carrito a la sección carrito en HTML
     addCartToHTML()
-    let sistema_texto = JSON.stringify(sistema) // el carrito se convierte a texto para poderlo almacenar en el local storage
-    //Se almacena el carrito en el local storage
+    let sistema_texto = JSON.stringify(sistema) // el sistema, incluyendo el carrito se convierte a texto para poderlo almacenar en el local storage
+    //Se almacena el sistema/carrito en el local storage
     localStorage.setItem("saved_system", sistema_texto)
 }
 
@@ -391,4 +400,5 @@ function muestra_imagen(color) {
     let nombre_imagen = modelo_filtrado[0].imagen[indice]
     let imagen = document.querySelector(".img-fluid")
     imagen.src = `../assets/images/${nombre_imagen}.webp`
+    return nombre_imagen
 }

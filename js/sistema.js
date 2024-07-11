@@ -39,8 +39,13 @@ class Sistema {
 }
 
 class Articulo{
-    constructor(id, cantidad){
+    constructor(id, modelo, capacidad, color, precio, imagen, cantidad){
         this.id = id
+        this.modelo = modelo
+        this.capacidad = capacidad
+        this.color = color
+        this.precio_unitario = precio
+        this.imagen = imagen
         this.cantidad = cantidad
     }
 }

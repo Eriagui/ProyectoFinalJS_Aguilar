@@ -1,4 +1,30 @@
-const addCartToHTML_index = () => {
+let body = document.querySelector('body');
+let iconCart = document.querySelector('.icon-cart');
+let closeCart = document.querySelector('.close');
+let listCartHTML = document.querySelector('.listCart');
+
+iconCart.addEventListener('click', () => {
+    body.classList.toggle('showCart');
+})
+closeCart.addEventListener('click', () => {
+    body.classList.toggle('showCart');
+})
+
+function cantidad_carrito() {
+    total_articulos = 0
+    sistema.carrito.forEach((elm) =>{
+        total_articulos = total_articulos + elm.cantidad
+    })
+    return total_articulos
+}
+
+function actualizar_icono_carrito(){
+    let total = cantidad_carrito()
+    document.querySelector(".cantidad-carrito").innerText = total
+}
+
+const addCartToHTML = () => {
+    OrderCart ()
     listCartHTML.innerHTML = '';
     let totalQuantity = 0;
     if(sistema.carrito.length > 0){
@@ -8,26 +34,51 @@ const addCartToHTML_index = () => {
             newItem.classList.add('item');
             newItem.dataset.id = item.id;
 
-            let positionProduct = sistema.productos.findIndex((value) => value.id == item.id);
-            let info = sistema.productos[positionProduct];
+            //let positionProduct = sistema.productos.findIndex((value) => value.id == item.id);
+            //let info = sistema.productos[positionProduct];
             listCartHTML.appendChild(newItem);
+
+            let path = window.location.href
+            let fileName = path.substring(path.lastIndexOf("/") + 1)
+            let prefix
+
+            //Si no estamos en la página index, entonces necesitamos dos puntos para la ruta
+            fileName == "index.html" ? prefix ="." : prefix=".."
+
             newItem.innerHTML = `
             <div class="image">
-                    <img src="./assets/images/${info.imagen}.webp">
+                    <img src="${prefix}/assets/images/${item.imagen}.webp">
                 </div>
                 <div class="name">
-                Iphone ${info.modelo}, ${info.color}, ${info.capacidad} GB
+                Iphone ${item.modelo}, ${item.color}, ${item.capacidad} GB
                 </div>
-                <div class="totalPrice">$${info.precio * item.cantidad}</div>
+                <div class="totalPrice">Precio $${item.precio_unitario}</div>
                 <div class="quantity">
                     <span class="minus"><</span>
                     <span>${item.cantidad}</span>
                     <span class="plus">></span>
                 </div>
+                <div class="totalPrice">Subtotal $${item.precio_unitario * item.cantidad}</div>
             `;
         })
     }
-    //iconCartSpan.innerText = totalQuantity;
+
+    if(sistema.carrito.length >0){
+        let total = 0;
+        sistema.carrito.forEach((item) => {
+            total = total + item.cantidad*item.precio_unitario
+        })
+
+        let newItem = document.createElement("div")
+        listCartHTML.appendChild(newItem)
+        newItem.innerHTML = `
+        <div class="total">
+            Total: $ ${total} MXN
+        </div>
+        `
+    }
+
+     //iconCartSpan.innerText = totalQuantity;
 }
 
 listCartHTML.addEventListener('click', (event) => {
@@ -61,10 +112,16 @@ const changeQuantityCart = (product_id, type) => {
                 break;
         }
     }
-    addCartToHTML_index();
+    addCartToHTML();
     actualizar_icono_carrito()
     //addCartToMemory();
     let sistema_texto = JSON.stringify(sistema) // el carrito se convierte a texto para poderlo almacenar en el local storage
     //Se almacena el carrito en el local storage
     localStorage.setItem("saved_system", sistema_texto)
+}
+
+function OrderCart (){
+    if(sistema.carrito.length > 0){
+        sistema.carrito.sort((a, b) => a.precio_unitario - b.precio_unitario)
+    }
 }

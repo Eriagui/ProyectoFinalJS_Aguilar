@@ -1,5 +1,5 @@
 actualizar_icono_carrito()
-addCartToHTML_index()
+addCartToHTML()
 
 // arreglo con el nombre de los modelos diferentes
 let modelo_array = []
@@ -17,9 +17,6 @@ sistema.productos.forEach((elm, num) => {
 })
 
 // Se obtiene el precio más bajo de cada modelo en el arreglo obtenido en el paso anterior
-
-console.log(sistema.productos[0].precio[0])
-
 
 modelo_array.forEach((elm,num) => {
     let precio = sistema.productos[num].precio[0]
@@ -47,9 +44,6 @@ modelo_array.forEach((elm,num) => {
     //let imagen = modelo_encontrado.imagen[num]
     image_array.push(imagen)
 })
-
-console.log(image_array)
-
 
 let container_cards = document.querySelector("#container")
 
