@@ -44,7 +44,7 @@ header .agrandar:hover {
 /*---------------Fin Header-------------------------*/
 /*------------------Inicio Footer--------------------------*/
 footer {
-    width: 115%;
+    /*width: 100%;*/
     background-color: black;
     padding: 20px 0px 0px 0px;
 }
@@ -100,7 +100,7 @@ footer {
     background-color: yellow;
 }
 
-.btn-blanco_estelar{
+.btn-blanco_estelar, .btn-blanco {
     background-color: whitesmoke;
 }
 
@@ -128,6 +128,35 @@ footer {
 }
 
 /******************************************************************************************************************************************/
+
+
+.capacidad, .color{
+    padding: 10px;
+    /*display: flex;
+    justify-content: space-evenly;
+    align-items: center;*/
+}
+
+.boton-carrito{
+    margin: 20px; 
+}
+
+.colores, .capacidades2, .precios{
+    border-color: gray;
+    border-style: solid;
+    margin: 20px; 
+    border-width: thin;
+}
+
+.capacidades{
+    padding: 10px;
+}
+
+
+
+
+
+
 
 .icon-cart{
     /*position: relative;*/
@@ -246,4 +275,21 @@ body.showCart .container{
 
 .total{
     text-align: right;
+}
+
+#container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#boton_precio{
+    margin: 20px;
+}
+
+.boton-filtro{
+    margin: 15px 0px 0px 0px;
+}
+
+.titulo-filtro{
+    padding: 10px 0px 0px 0px;
 }

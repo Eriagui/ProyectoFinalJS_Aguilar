@@ -81,7 +81,7 @@
                         <div class="row">
                             <p><strong>Configura tu equipo</strong></p>
                         </div>
-                        <div class="row" id="capacidades">
+                        <div class="row capacidades">
                             <p>Capacidad en GB</p>
                             <div class="col-3">
                                 <button type="button" class="btn btn-secondary btn-selected" id="capacity1">64</button>
@@ -93,10 +93,14 @@
                                 <button type="button" class="btn btn-secondary" id="capacity3">256</button>
                             </div>
                         </div>
-                        <div class="row">
-                            <p></p>
+                        
+                        <div class="row capacidades">
+                            <div class="col-3" id="parent_capacity4">
+                                <button type="button" class="btn btn-secondary" id="capacity4">256</button>
+                            </div>
                         </div>
-                        <div class="row">
+
+                        <div class="row color">
                             <p>Color</p>
                             <div class="col-4">
                                 <button type="button" class="btn btn-color btn-selected" id="color1">Negro</button>
@@ -105,8 +109,7 @@
                                 <button type="button" class="btn btn-color" id="color2">Amarillo</button>
                             </div>
                         </div>
-                        <div class="row">
-                            <p></p>
+                        <div class="row color">
                             <div class="col-4" id="parent_color3">
                                 <button type="button" class="btn btn-color" id="color3">Azul Media Noche</button>
                             </div>
@@ -114,8 +117,7 @@
                                 <button type="button" class="btn btn-color" id="color4">Rojo</button>
                             </div>
                         </div>
-                        <div class="row">
-                            <p></p>
+                        <div class="row color">
                             <div class="col-4" id="parent_color5">
                                 <button type="button" class="btn btn-color" id="color5">Azul Media Noche</button>
                             </div>
@@ -123,12 +125,7 @@
                                 <button type="button" class="btn btn-color" id="color6">Rojo</button>
                             </div>
                         </div>
-                        <div class="row">
-                            <p></p>
-                        </div>
-                        <div class="row">
-                            <p></p>
-                        </div>
+                    
                         <div class="row">
                             <div class="col-2">
                                 <p>Precio:</p>
@@ -138,11 +135,8 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-12">
+                            <div class="boton-carrito">
                                 <button type="button" class="btn btn-primary">Agregar al carrito</button>
-                                <p></p>
-                                <p></p>
-                                <p></p>
                             </div>
                         </div>
                     </div>
@@ -200,8 +194,9 @@
         </footer>
     </div>
     </div>
-    <!-- JS de Bootstrap descargado-->
+    
     <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../js/sistema.js"></script>
     <script src="../js/carrito.js"></script>
     <script src="../js/producto.js"></script>
