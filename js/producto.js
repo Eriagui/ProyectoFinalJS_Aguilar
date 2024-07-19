@@ -1,69 +1,84 @@
 
+// Programa principal de producto.html
 
-// Se cargan los artículos en el icono y la lista del carrito
-actualizar_icono_carrito()
-addCartToHTML()
+let sistema = new Sistema
 
-let clases_seleccionado = []
-let precio
-let capacidad
-let color
-let modelo = localStorage.getItem("modelo")
-let capacidades = []
-let colores = []
-let nombre_imagen
+fetch('../js/sistema_productos.json')
+    .then(response => response.json())
+    .then(data => {
+        sistema.productos = data
+        actualizar_icono_carrito() //función en carrito.js
+        addCartToHTML() //función en carrito.js
+        producto_setup(sistema)
+    })
 
-let modelo_filtrado = sistema.productos.filter((elm) => elm.modelo == modelo)
-
-// Se obtienen todas las capacidades disponibles del modelo
-capacidades = modelo_filtrado[0].capacidad
-
-// Se obtienen todos los colores disponibles del modelo
-colores = modelo_filtrado[0].color
-
-// Se clona la plantilla para modificarla posteriormente
-let plantilla = document.querySelector("template").content.cloneNode(true)
-
-// Modelo del producto
-plantilla.querySelector("h1").innerText = "iphone " + modelo
-
-// Botones de capacidades del producto
-
-// Se coloca la información en los que aplican
-capacidades.forEach((elm, num) => {
-    plantilla.querySelector(`#capacity${num + 1}`).innerText = capacidades[num]
-})
-
-let longitud = capacidades.length
-// Se remueven los botones sobrantes
-for (let i = longitud + 1; i < 5; i++) {
-    let parent = plantilla.querySelector(`#parent_capacity${i}`)
-    let child = plantilla.querySelector(`#capacity${i}`)
-    parent.removeChild(child)
+function producto_setup(sistema) {
+    initial_setup(sistema)
+    botons_setup(sistema)
 }
 
-// Botones de colores del producto
+function initial_setup(sistema) {
+    let clases_seleccionado = []
+    let precio
+    let capacidad
+    let color
+    let modelo = localStorage.getItem("modelo")
+    let capacidades = []
+    let colores = []
+    let nombre_imagen
 
-// Se coloca la información en los que aplican
-colores.forEach((elm, num) => {
-    plantilla.querySelector(`#color${num + 1}`).innerText = colores[num]
-    plantilla.querySelector(`#color${num + 1}`).classList.add(`btn-${colores[num]}`)
-})
 
-longitud = colores.length
-// Se remueven los botones sobrantes
-for (let i = longitud + 1; i < 7; i++) {
-    let parent = plantilla.querySelector(`#parent_color${i}`)
-    let child = plantilla.querySelector(`#color${i}`)
-    parent.removeChild(child)
-}
+    let modelo_filtrado = sistema.productos.filter((elm) => elm.modelo == modelo)
 
-// Se coloca la descripción del modelo correspondiente
-let descripcion = plantilla.querySelector("#descripcion")
+    // Se obtienen todas las capacidades disponibles del modelo
+    capacidades = modelo_filtrado[0].capacidad
 
-switch (modelo) {
-    case "SE":
-        descripcion.innerHTML = `
+    // Se obtienen todos los colores disponibles del modelo
+    colores = modelo_filtrado[0].color
+
+    // Se clona la plantilla para modificarla posteriormente
+    let plantilla = document.querySelector("template").content.cloneNode(true)
+
+    // Modelo del producto
+    plantilla.querySelector("h1").innerText = "iphone " + modelo
+
+    // Botones de capacidades del producto
+
+    // Se coloca la información en los que aplican
+    capacidades.forEach((elm, num) => {
+        plantilla.querySelector(`#capacity${num + 1}`).innerText = capacidades[num]
+    })
+
+    let longitud = capacidades.length
+    // Se remueven los botones sobrantes
+    for (let i = longitud + 1; i < 5; i++) {
+        let parent = plantilla.querySelector(`#parent_capacity${i}`)
+        let child = plantilla.querySelector(`#capacity${i}`)
+        parent.removeChild(child)
+    }
+
+    // Botones de colores del producto
+
+    // Se coloca la información en los que aplican
+    colores.forEach((elm, num) => {
+        plantilla.querySelector(`#color${num + 1}`).innerText = colores[num]
+        plantilla.querySelector(`#color${num + 1}`).classList.add(`btn-${colores[num]}`)
+    })
+
+    longitud = colores.length
+    // Se remueven los botones sobrantes
+    for (let i = longitud + 1; i < 7; i++) {
+        let parent = plantilla.querySelector(`#parent_color${i}`)
+        let child = plantilla.querySelector(`#color${i}`)
+        parent.removeChild(child)
+    }
+
+    // Se coloca la descripción del modelo correspondiente
+    let descripcion = plantilla.querySelector("#descripcion")
+
+    switch (modelo) {
+        case "SE":
+            descripcion.innerHTML = `
             <h2>Descripción del Producto</h2>
                 <ul>
                     <li>Chip A15 Bionic, el mismo que trae el iPhone13</li>
@@ -75,10 +90,10 @@ switch (modelo) {
                     <li>Botón de inicio para que te sientas en casa</li>
                 </ul>
         `
-        break;
+            break;
 
-    case "12":
-        descripcion.innerHTML = `
+        case "12":
+            descripcion.innerHTML = `
             <h2>Descripción del Producto</h2>
                 <ul>
                     <li>Pantalla Super Retina XDR y True Tone Pantalla OLED de 6.1 pulgadas (diagonal) sin marco</li>
@@ -90,10 +105,10 @@ switch (modelo) {
                     <li>Escáner LiDar para tomar retratos con modo de noche y con poca luz.</li>
                 </ul>
         `
-        break;
+            break;
 
-    case "13":
-        descripcion.innerHTML = `
+        case "13":
+            descripcion.innerHTML = `
             <h2>Descripción del Producto</h2>
                 <ul>
                     <li>Pantalla Super Retina XDR de 6.1 Pulgadas</li>
@@ -112,10 +127,10 @@ switch (modelo) {
                     <li>Resistencia al agua IP68</li>
                 </ul>
         `
-        break;
+            break;
 
-    case "14":
-        descripcion.innerHTML = `
+        case "14":
+            descripcion.innerHTML = `
                 <h2>Descripción del Producto</h2>
                     <ul>
                         <li>Pantalla Super Retina XDR de 6.1 pulgadas</li>
@@ -129,10 +144,10 @@ switch (modelo) {
                         <li>iOS 16 ofrece aún más opciones de personalización y más formas de comunicarse y compartir</li>
                     </ul>
             `
-        break;
+            break;
 
-    case "14_Plus":
-        descripcion.innerHTML = `
+        case "14_Plus":
+            descripcion.innerHTML = `
                     <h2>Descripción del Producto</h2>
                         <ul>
                             <li>Pantalla Super Retina XDR de 6.1 pulgadas</li>
@@ -146,10 +161,10 @@ switch (modelo) {
                             <li>iOS 16 ofrece aún más opciones de personalización y más formas de comunicarse y compartir</li>
                         </ul>
                 `
-        break;
+            break;
 
-    case "15":
-        descripcion.innerHTML = `
+        case "15":
+            descripcion.innerHTML = `
                     <h2>Descripción del Producto</h2>
                         <ul>
                             <li>LA DYNAMIC ISLAND LLEGA AL IPHONE 15 — La Dynamic Island te muestra alertas y Actividades en Vivo para que no te pierdas nada mientras haces de todo. Puedes ver cuánto falta para que llegue el auto que pediste, saber si alguien te está llamando, consultar el estado de tu vuelo y mucho más.</li>
@@ -162,10 +177,10 @@ switch (modelo) {
                             <li>INNOVACIONES QUE MARCAN LA DIFERENCIA — El iPhone cuenta con tecnologías de privacidad que te ayudan a mantener el control de tus datos. Está fabricado con más materiales reciclados para reducir su impacto medioambiental. Y viene con funcionalidades integradas que lo hace accesible para todo el mundo.</li>
                         </ul>
                 `
-        break;
+            break;
 
-    case "15_Plus":
-        descripcion.innerHTML = `
+        case "15_Plus":
+            descripcion.innerHTML = `
                     <h2>Descripción del Producto</h2>
                         <ul>
                             <li>LA DYNAMIC ISLAND LLEGA AL IPHONE 15 PLUS — La Dynamic Island te muestra alertas y Actividades en Vivo para que no te pierdas nada mientras haces de todo. Puedes ver cuánto falta para que llegue el auto que pediste, saber si alguien te está llamando, consultar el estado de tu vuelo y mucho más.</li>
@@ -178,10 +193,10 @@ switch (modelo) {
                             <li>INNOVACIONES QUE MARCAN LA DIFERENCIA — El iPhone cuenta con tecnologías de privacidad que te ayudan a mantener el control de tus datos. Está fabricado con más materiales reciclados para reducir su impacto medioambiental. Y viene con funcionalidades integradas que lo hace accesible para todo el mundo.</li>
                         </ul>
                 `
-        break;
+            break;
 
-    case "15_Pro":
-        descripcion.innerHTML = `
+        case "15_Pro":
+            descripcion.innerHTML = `
                     <h2>Descripción del Producto</h2>
                         <ul>
                             <li>FORJADO EN TITANIO — El iPhone 15 Pro tiene un diseño resistente y ligero, con titanio de calidad aeroespacial y parte posterior de vidrio mate texturizado. Frente de Ceramic Shield, más duro que el vidrio más duro de cualquier smartphone. Y resistencia a las salpicaduras, al agua y al polvo.</li>
@@ -194,10 +209,10 @@ switch (modelo) {
                             <li>INNOVACIONES QUE MARCAN LA DIFERENCIA — El iPhone cuenta con tecnologías de privacidad que te ayudan a mantener el control de tus datos. Está fabricado con más materiales reciclados para reducir su impacto medioambiental. Y viene con funcionalidades integradas que lo hacen accesible para todo el mundo</li>
                         </ul>
                 `
-        break;
+            break;
 
-    case "15_Pro_Max":
-        descripcion.innerHTML = `
+        case "15_Pro_Max":
+            descripcion.innerHTML = `
                     <h2>Descripción del Producto</h2>
                         <ul>
                             <li>FORJADO EN TITANIO — El iPhone 15 Pro Max tiene un diseño resistente y ligero, con titanio de calidad aeroespacial y parte posterior de vidrio mate texturizado. Frente de Ceramic Shield, más duro que el vidrio más duro de cualquier smartphone. Y resistencia a las salpicaduras, al agua y al polvo.</li>
@@ -210,98 +225,107 @@ switch (modelo) {
                             <li>INNOVACIONES QUE MARCAN LA DIFERENCIA — El iPhone cuenta con tecnologías de privacidad que te ayudan a mantener el control de tus datos. Está fabricado con más materiales reciclados para reducir su impacto medioambiental. Y viene con funcionalidades integradas que lo hacen accesible para todo el mundo</li>
                         </ul>
                 `
-        break;
+            break;
 
-    default:
-        descripcion.innerHTML = `
+        default:
+            descripcion.innerHTML = `
             <h2>Descripción no Encontrada</h2>
         `
+    }
+
+    // Se despliegan todos los cambios
+    let contenedor = document.querySelector("#container")
+    contenedor.append(plantilla)
+
+    // Se obtiene la capacidad del equipo seleccionado (por defecto)
+    capacidad = get_capacity()
+
+    // Se obtiene el color del equipo seleccionado (por defecto)
+    color = get_color()
+
+    // Se muestra el precio del equipo seleccionado (por defecto)
+    muestra_precio(modelo_filtrado, capacidades, capacidad)
+    // Se muestra la imagen del equipo seleccionado (por defecto)
+    nombre_imagen = muestra_imagen(modelo_filtrado, colores, color)
 
 }
 
-// Se despliegan todos los cambios
-let contenedor = document.querySelector("#container")
-contenedor.append(plantilla)
+function botons_setup() {
+    let modelo = localStorage.getItem("modelo")
+    let modelo_filtrado = sistema.productos.filter((elm) => elm.modelo == modelo)
+    // Se obtienen todas las capacidades disponibles del modelo
+    let capacidades = modelo_filtrado[0].capacidad
+    // Se obtienen todos los colores disponibles del modelo
+    let colores = modelo_filtrado[0].color
+    let capacidad
+    let color = get_color()
+    let nombre_imagen = muestra_imagen(modelo_filtrado, colores, color)
 
-// Se obtiene la capacidad del equipo seleccionado (por defecto)
-capacidad = get_capacity()
+    // Se identifican todos los botones
+    let boton = document.querySelectorAll(".btn")
 
-// Se obtiene el color del equipo seleccionado (por defecto)
-color = get_color()
+    // Se recorren todos los botones
+    boton.forEach((btn, num) => {
 
-// Se muestra el precio del equipo seleccionado (por defecto)
-muestra_precio(capacidad)
-// Se muestra la imagen del equipo seleccionado (por defecto)
-nombre_imagen = muestra_imagen(color)
+        // Se obtienen las clases del botón a evaluar
+        let clases = boton[num].classList.value
 
-// Se identifican todos los botones
-let boton = document.querySelectorAll(".btn")
+        // Si el botón no es un botón primario (botón para ver detalles del producto)
+        if (!clases.includes("btn-primary")) {
 
-// Se le agrega la categoría de seleccionado al botón sobre el cual se hace click
-// Se recorren todos los botones
-boton.forEach((btn, num) => {
+            //Se le pondrá un border al hacer click en él
+            boton[num].addEventListener("click", () => {
+                let seleccionado = num
 
-    // Se obtienen las clases del botón a evaluar
-    let clases = boton[num].classList.value
+                // Se obtienen las clases del botón seleccionado
+                clases_seleccionado = boton[seleccionado].classList.value
 
-    // Si el botón no es un botón primario (botón para ver detalles del producto)
-    if (!clases.includes("btn-primary")) {
+                // Se le agrega la clase de "btn-selected" al nuevo botón seleccionado
+                boton[seleccionado].classList.add("btn-selected")
 
-        //Se le pondrá un border al hacer click en él
-        boton[num].addEventListener("click", () => {
-            let seleccionado = num
+                // Se le quita la clase de seleccionado a los botones previamente seleccionados (con el mismo objetivo: seleccionar capacidad o color)
+                unselect_other_btns(boton, seleccionado)
 
-            // Se obtienen las clases del botón seleccionado
-            clases_seleccionado = boton[seleccionado].classList.value
+                // Se obtiene la capacidad del equipo seleccionado
+                capacidad = get_capacity()
+                // Se obtiene el color del equipo seleccionado
+                color = get_color()
 
-            // Se le agrega la clase de "btn-selected" al nuevo botón seleccionado
-            boton[seleccionado].classList.add("btn-selected")
+                // Se muestra el precio del equipo seleccionado
+                muestra_precio(modelo_filtrado, capacidades, capacidad)
+                // Se muestra la imagen del equipo seleccionado
 
-            // Se le quita la clase de seleccionado a los botones previamente seleccionados (con el mismo objetivo: seleccionar capacidad o color)
-            unselect_other_btns(boton, seleccionado)
-
-            // Se obtiene la capacidad del equipo seleccionado
-            capacidad = get_capacity()
-            // Se obtiene el color del equipo seleccionado
-            color = get_color()
-
-            // Se muestra el precio del equipo seleccionado
-            muestra_precio(capacidad)
-            // Se muestra la imagen del equipo seleccionado
-            nombre_imagen = muestra_imagen(color)
-
-        })
-    }
-})
-
-// Cuando se apriete el botón, agregar al carrito, se agrega el producto al carrito
-let boton_agregar = document.querySelector(".btn-primary")
-boton_agregar.addEventListener("click", () => {
-
-    // Si el precio no se ha podido determinar es porque el Iphone no se ha terminado de configurar
-    if (isNaN(precio)) {
-        alert("Para poder agregar, primero debes terminar de configurar tu Iphone")
-    } else {  // Si el Iphone ya está configurado, se puede agregar al carrito
-        let id_producto = get_product_id(modelo, capacidad, color)
-        agregar_carrito(id_producto, modelo, capacidad, color, precio, nombre_imagen)
-        actualizar_icono_carrito()
-        if (!body.classList.contains('showCart')) {
-
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Producto agregado al carrito",
-                showConfirmButton: false,
-                timer: 1500
-            });
-
-            //alert("Producto agregado al carrito")
+                nombre_imagen = muestra_imagen(modelo_filtrado, colores, color)
+            })
         }
+    })
 
-    }
-})
+    // Cuando se apriete el botón, agregar al carrito, se agrega el producto al carrito
+    let boton_agregar = document.querySelector(".btn-primary")
+    boton_agregar.addEventListener("click", () => {
 
-function get_price(capacidad) { // Obtiene el precio del producto seleccionado
+        // Si el precio no se ha podido determinar es porque el Iphone no se ha terminado de configurar
+        if (isNaN(precio)) {
+            alert("Para poder agregar, primero debes terminar de configurar tu Iphone")
+        } else {  // Si el Iphone ya está configurado, se puede agregar al carrito
+            let id_producto = get_product_id(modelo, capacidad, color)
+            agregar_carrito(id_producto, modelo, capacidad, color, precio, nombre_imagen)
+            actualizar_icono_carrito()
+            if (!body.classList.contains('showCart')) {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Producto agregado al carrito",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        }
+    })
+}
+
+
+function get_price(modelo_filtrado, capacidades, capacidad) { // Obtiene el precio del producto seleccionado
     let indice = capacidades.indexOf(capacidad)
     let precio = modelo_filtrado[0].precio[indice]
     return precio
@@ -316,33 +340,34 @@ function get_product_id(modelo, capacidad, color) {
 
 function agregar_carrito(id_producto, modelo, capacidad, color, precio, nombre_imagen) {
     let cantidad = 1
-    if (sistema.carrito.find((elm) => elm.id == id_producto)) { //Si el artículo ya exite en el carrito, se aumenta la cantidad en 1
-        sistema.carrito.forEach((elm, num) => {
-            if (sistema.carrito[num].id == id_producto) {
-                sistema.carrito[num].cantidad++
+    if (carrito.find((elm) => elm.id == id_producto)) { //Si el artículo ya exite en el carrito, se aumenta la cantidad en 1
+        carrito.forEach((elm, num) => {
+            if (carrito[num].id == id_producto) {
+                carrito[num].cantidad++
             }
         })
     } else { // Si el producto no está aún en el carrito, se agrega como un nuevo artículo
         let articulo = new Articulo(id_producto, modelo, capacidad, color, precio, nombre_imagen, cantidad)
-        sistema.carrito.push(articulo)  // se agrega el artículo al carrito
+        carrito.push(articulo)  // se agrega el artículo al carrito
     }
 
     //Se agrega el carrito a la sección carrito en HTML
     addCartToHTML()
-    let sistema_texto = JSON.stringify(sistema) // el sistema, incluyendo el carrito se convierte a texto para poderlo almacenar en el local storage
-    //Se almacena el sistema/carrito en el local storage
-    localStorage.setItem("saved_system", sistema_texto)
+
+    let cart_text = JSON.stringify(carrito) // el carrito se convierte a texto para poderlo almacenar en el local storage
+    //Se almacena el carrito en el local storage
+    localStorage.setItem("saved_cart", cart_text)
 }
 
-function muestra_precio(capacidad) {
-    if (capacidad && color) { // El precio sólo se calcula si ya se terminó de configurar el Iphone
-        precio = get_price(capacidad)
-        let precio_texto = "$ " + precio + " MXN"
-        document.querySelector(".precio").innerText = precio_texto
-    }
+function muestra_precio(modelo_filtrado, capacidades, capacidad) {
+
+    precio = get_price(modelo_filtrado, capacidades, capacidad)
+    let precio_texto = "$ " + precio + " MXN"
+    document.querySelector(".precio").innerText = precio_texto
+
 }
 
-function muestra_imagen(color) {
+function muestra_imagen(modelo_filtrado, colores, color) {
     let indice = colores.indexOf(color)
     let nombre_imagen = modelo_filtrado[0].imagen[indice]
     let imagen = document.querySelector(".img-fluid")
